@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import SearchBar from "../../components/SearchBar/SearchBar.tsx";
 import MovieGrid from "../../components/MovieGrid/MovieGrid.tsx";
