@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { Movie } from "../../src/types/movie.ts";
 
-const ACCESS_TOKEN = import.meta.env.VITE_TMDB_TOKEN;
+// const ACCESS_TOKEN = import.meta.env.VITE_TMDB_TOKEN;
 const BASE_URL = "https://api.themoviedb.org/3";
 
 export interface TMDBSearchResponse {
@@ -16,7 +16,7 @@ export const fetchMovies = async (query: string): Promise<Movie[]> => {
     `${BASE_URL}/search/movie`,
     {
       headers: {
-        Authorization: `Bearer ${ACCESS_TOKEN}`,
+        Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`,
       },
       params: {
         query: query,
