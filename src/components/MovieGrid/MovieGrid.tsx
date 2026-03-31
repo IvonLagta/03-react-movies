@@ -1,10 +1,10 @@
 import css from "./MovieGrid.module.css";
 import { Movie } from "../../types/movie.ts";
 
-type MovieGridProps = {
+interface MovieGridProps {
   movies: Movie[] | null | undefined;
-  onSelect: (movieId: number) => void;
-};
+  onSelect: (movie: Movie) => void;
+}
 
 const MovieGrid = ({ movies, onSelect }: MovieGridProps) => {
   if (!movies || movies.length === 0) {
@@ -15,11 +15,20 @@ const MovieGrid = ({ movies, onSelect }: MovieGridProps) => {
     <ul className={css.grid}>
       {movies.map((movie) => (
         <li key={movie.id}>
-          <div className={css.card} onClick={() => onSelect(movie.id)}>
+          <div
+            className={css.card}
+            onClick={() => onSelect(movie)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                onSelect(movie);
+              }
+            }}>
             <img
               className={css.image}
               src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-              alt={movie.title}
+              alt={movie.title || "Movie poster"}
               loading="lazy"
             />
             <h2 className={css.title}>{movie.title}</h2>

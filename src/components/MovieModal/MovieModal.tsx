@@ -3,10 +3,10 @@ import { createPortal } from "react-dom";
 import css from "./MovieModal.module.css";
 import { Movie } from "../../types/movie.ts";
 
-type MovieModalProps = {
+interface MovieModalProps {
   movie: Movie | null;
   onClose: () => void;
-};
+}
 
 const MovieModal = ({ movie, onClose }: MovieModalProps) => {
   useEffect(() => {
@@ -51,7 +51,7 @@ const MovieModal = ({ movie, onClose }: MovieModalProps) => {
 
         <img
           src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-          alt={movie.title}
+          alt={movie.title || "Movie backdrop"}
           className={css.image}
         />
 
@@ -59,10 +59,11 @@ const MovieModal = ({ movie, onClose }: MovieModalProps) => {
           <h2>{movie.title}</h2>
           <p>{movie.overview}</p>
           <p>
-            <strong>Release Date:</strong> {movie.release_date}
+            <strong>Release Date:</strong> {movie.release_date || "N/A"}
           </p>
           <p>
-            <strong>Rating:</strong> {movie.vote_average}/10
+            <strong>Rating:</strong> {movie.vote_average?.toFixed(1) || "N/A"}
+            /10
           </p>
         </div>
       </div>
